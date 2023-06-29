@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+// Structure to represent a candidate
+struct Candidate {
+    std::string name;
+    int votes;
+
+    Candidate(const std::string& _name) : name(_name), votes(0) {}
+};
+
+// Function to display the list of candidates
+void displayCandidates(const std::vector<Candidate>& candidates) {
+    std::cout << "Candidates:\n";
+    for (const auto& candidate : candidates) {
+        std::cout << candidate.name << std::endl;
+    }
+}
+
+// Function to cast a vote for a candidate
+void castVote(std::vector<Candidate>& candidates, const std::string& candidateName) {
+    for (auto& candidate : candidates) {
+        if (candidate.name == candidateName) {
+            candidate.votes++;
+            std::cout << "Vote casted successfully for " << candidate.name << "!\n";
+            return;
+        }
+    }
+    std::cout << "Invalid candidate name. Vote not casted.\n";
+}
+
+// Function to display the results
+void displayResults(const std::vector<Candidate>& candidates) {
+    std::cout << "Voting Results:\n";
+    for (const auto& candidate : candidates) {
+        std::cout << candidate.name << ": " << candidate.votes << " votes\n";
+    }
+}
+
+int main() {
+    std::vector<Candidate> candidates;
+
+    // Add candidates
+    candidates.push_back(Candidate("Candidate 1"));
+    candidates.push_back(Candidate("Candidate 2"));
+    candidates.push_back(Candidate("Candidate 3"));
+
+    // Display the candidates
+    displayCandidates(candidates);
+
+    // Cast some votes
+    castVote(candidates, "Candidate 1");
+    castVote(candidates, "Candidate 3");
+    castVote(candidates, "Invalid Candidate");
+
+    // Display the results
+    displayResults(candidates);
+
+    return 0;
+}
